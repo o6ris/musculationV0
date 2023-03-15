@@ -11,5 +11,6 @@ const vehicleControllers = require("./controllers/vehicleControllers");
 // router.delete("/items/:id", itemControllers.destroy);
 
 router.get("/vehicles", vehicleControllers.browse);
+router.get("/vehicles/:id", vehicleControllers.read);
 
 module.exports = router;
