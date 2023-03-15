@@ -28,7 +28,22 @@ const read = (req, res) => {
     });
 };
 
+const add = (req, res) => {
+  const vehicle = req.body;
+
+  models.vehicle
+    .insert(vehicle)
+    .then(([result]) => {
+      res.location(`/items/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browse,
   read,
+  add,
 };

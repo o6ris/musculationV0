@@ -12,5 +12,6 @@ const vehicleControllers = require("./controllers/vehicleControllers");
 
 router.get("/vehicles", vehicleControllers.browse);
 router.get("/vehicles/:id", vehicleControllers.read);
+router.post("/vehicles", vehicleControllers.add);
 
 module.exports = router;
