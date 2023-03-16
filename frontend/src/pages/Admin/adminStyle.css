@@ -1,0 +1,8 @@
+.vehicleList {
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 10px 0;
+}
