@@ -1,0 +1,47 @@
+.formVehicleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0px;
+    gap: 10px;
+}
+
+.formVehicleContainer .field {
+    width: 70%;
+    border: none;
+    padding: 10px 5px;
+}
+
+.vehicleFormPicture {
+    width: 70%;
+    height: 200px;
+    background: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.formSelect {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    gap: 20px;
+}
+
+.formSelect select, .formSelect input {
+    padding: 10px 5px;
+    width: 100%;
+}
+
+.formButton {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.formButton button {
+    padding: 10px;
+    border-radius: 5px;
+}

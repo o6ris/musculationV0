@@ -10,8 +10,6 @@ function VehicleCardTemplate({ data }) {
         className="vehiclePicture"
         style={{ backgroundImage: `url(${data.picture})` }}
       />
-
-      {/* <img className="vehiclePicture" src={data.picture} alt={data.name} /> */}
       <ul className="vehicleDetails">
         <li>
           <span>Fuel : </span> {data.fuel === 0 ? "Essence" : "Diesel"}

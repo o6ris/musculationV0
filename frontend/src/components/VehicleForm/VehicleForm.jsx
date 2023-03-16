@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import "./vehicleFormStyle.css";
 
 function VehicleForm({
   vehicle,
@@ -11,6 +12,7 @@ function VehicleForm({
     <div>
       <form className="formVehicleContainer">
         <input
+          className="field"
           type="text"
           name="name"
           required
@@ -18,41 +20,50 @@ function VehicleForm({
           onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
         />
         <input
+          className="field"
           type="text"
           name="picture"
           required
           value={vehicle?.picture}
           onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
         />
-        <select
-          onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
-          name="fuel"
-          required
-          value={vehicle.fuel}
-        >
-          <option value={0}>Essence</option>
-          <option value={1}>Diesel</option>
-        </select>
-        <select
-          onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
-          name="gearbox"
-          required
-          value={vehicle.gearbox}
-        >
-          <option value={0}>Manual</option>
-          <option value={1}>Automatic</option>
-        </select>
-        <input
-          type="text"
-          name="price"
-          required
-          value={vehicle?.price}
-          onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
+        <div
+          className="vehicleFormPicture"
+          style={{ backgroundImage: `url(${vehicle?.picture})` }}
         />
-        <button onClick={handleButtonAction} type="submit">
-          {buttonText}
-        </button>
-        <button type="button">Cancel</button>
+        <div className="formSelect">
+          <select
+            onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
+            name="fuel"
+            required
+            value={vehicle.fuel}
+          >
+            <option value={0}>Essence</option>
+            <option value={1}>Diesel</option>
+          </select>
+          <select
+            onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
+            name="gearbox"
+            required
+            value={vehicle.gearbox}
+          >
+            <option value={0}>Manual</option>
+            <option value={1}>Automatic</option>
+          </select>
+          <input
+            type="text"
+            name="price"
+            required
+            value={vehicle?.price}
+            onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
+          />
+        </div>
+        <div className="formButton">
+          <button onClick={handleButtonAction} type="submit">
+            {buttonText}
+          </button>
+          <button type="button">Cancel</button>
+        </div>
       </form>
     </div>
   );
