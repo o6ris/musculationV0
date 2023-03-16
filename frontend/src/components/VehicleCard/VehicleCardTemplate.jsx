@@ -14,10 +14,10 @@ function VehicleCardTemplate({ data }) {
       {/* <img className="vehiclePicture" src={data.picture} alt={data.name} /> */}
       <ul className="vehicleDetails">
         <li>
-          <span>Cardburant : </span> {data.fuel === 0 ? "Essence" : "Diesel"}
+          <span>Fuel : </span> {data.fuel === 0 ? "Essence" : "Diesel"}
         </li>
         <li>
-          <span>Boîte de vitesse : </span>
+          <span>Gearbox : </span>
           {data.gearbox === 0 ? "Manuel" : "Automatique"}
         </li>
       </ul>
