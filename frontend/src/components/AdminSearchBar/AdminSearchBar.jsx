@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import apiConnection from "@services/apiConnection";
 
 import "./adminSearchBarStyle.css";
 
-function AdminSearchBar() {
+function AdminSearchBar({ getOneVehicle }) {
   const [vehiclesList, setVehiclesList] = useState();
   const [isDisplay, setIsDisplay] = useState(false);
   const [searchVehicle, setSearchVehicle] = useState("");
@@ -14,6 +15,11 @@ function AdminSearchBar() {
       .get(`/vehicles`)
       .then((allVehicles) => setVehiclesList(allVehicles.data))
       .catch((err) => console.error(err));
+  };
+
+  const selectVehicle = (id) => {
+    getOneVehicle(id);
+    setIsDisplay(false);
   };
 
   useEffect(() => {
@@ -38,7 +44,11 @@ function AdminSearchBar() {
               vehicle.name.toLowerCase().includes(searchVehicle)
             )
             .map((vehicle) => (
-              <button type="button" key={vehicle.id}>
+              <button
+                type="button"
+                key={vehicle.id}
+                onClick={() => selectVehicle(vehicle.id)}
+              >
                 {vehicle.name}
               </button>
             ))}
