@@ -6,6 +6,7 @@ function VehicleForm({
   vehicle,
   handleInputOnChange,
   handleButtonAction,
+  handleCancelButton,
   buttonText,
 }) {
   return (
@@ -62,7 +63,9 @@ function VehicleForm({
           <button onClick={handleButtonAction} type="submit">
             {buttonText}
           </button>
-          <button type="button">Cancel</button>
+          <button onClick={handleCancelButton} type="button">
+            Cancel
+          </button>
         </div>
       </form>
     </div>

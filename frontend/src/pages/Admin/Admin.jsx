@@ -52,15 +52,27 @@ function Admin() {
     }
   };
 
+  const handleCancelButton = () => {
+    setVehicle({
+      name: "",
+      picture: "",
+      fuel: "",
+      gearbox: "",
+      price: "",
+    });
+    setDisplayForm(false);
+  };
+
   return (
     <div>
       <AdminSearchBar getOneVehicle={getOneVehicle} />
       {displayForm && (
         <>
           <VehicleForm
+            handleCancelButton={handleCancelButton}
             handleButtonAction={handleEditVehicle}
-            vehicle={vehicle}
             handleInputOnChange={handleInputOnChange}
+            vehicle={vehicle}
             buttonText="Update"
           />
           {displayError && <div>{errorMessage}</div>}
