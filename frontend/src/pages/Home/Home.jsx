@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiConnection from "@services/apiConnection";
-import VehicleCardTemplate from "@components/VehicleCardTemplate";
+import VehicleCardTemplate from "@components/VehicleCard/VehicleCardTemplate";
+import "@pages/Home/homeStyle.css";
 
 export default function Home() {
   const [vehicles, setVehicles] = useState();
@@ -19,9 +20,9 @@ export default function Home() {
     <header className="App-header">
       <h1>Rent my car</h1>
       <section>
-        <ul>
+        <ul className="cardContainer">
           {vehicles?.map((vehicle) => (
-            <li>
+            <li className="vehicleCardList">
               <VehicleCardTemplate data={vehicle} />
             </li>
           ))}
