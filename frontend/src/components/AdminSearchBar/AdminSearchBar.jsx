@@ -4,7 +4,7 @@ import apiConnection from "@services/apiConnection";
 
 import "./adminSearchBarStyle.css";
 
-function AdminSearchBar({ getOneVehicle }) {
+function AdminSearchBar({ getOneVehicle, handleCancelButton }) {
   const [vehiclesList, setVehiclesList] = useState();
   const [isDisplay, setIsDisplay] = useState(false);
   const [searchVehicle, setSearchVehicle] = useState("");
@@ -20,6 +20,7 @@ function AdminSearchBar({ getOneVehicle }) {
   const selectVehicle = (id) => {
     getOneVehicle(id);
     setIsDisplay(false);
+    handleCancelButton();
   };
 
   useEffect(() => {

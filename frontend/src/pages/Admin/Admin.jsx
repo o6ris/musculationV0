@@ -81,7 +81,10 @@ function Admin() {
   return (
     <div>
       <h1>Search your Vehicle</h1>
-      <AdminSearchBar getOneVehicle={getOneVehicle} />
+      <AdminSearchBar
+        getOneVehicle={getOneVehicle}
+        handleCancelButton={() => handleCancelButton(setDisplayAddForm)}
+      />
       <button
         onClick={handleDisplayAddForm}
         type="button"
