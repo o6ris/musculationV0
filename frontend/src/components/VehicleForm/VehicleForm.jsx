@@ -41,6 +41,7 @@ function VehicleForm({
             required
             value={vehicle.fuel}
           >
+            <option value="">--Fuel--</option>
             <option value={0}>Essence</option>
             <option value={1}>Diesel</option>
           </select>
@@ -50,6 +51,7 @@ function VehicleForm({
             required
             value={vehicle.gearbox}
           >
+            <option value="">--Gearbox--</option>
             <option value={0}>Manual</option>
             <option value={1}>Automatic</option>
           </select>

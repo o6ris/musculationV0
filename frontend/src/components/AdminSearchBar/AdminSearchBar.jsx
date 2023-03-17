@@ -1,31 +1,17 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
-import apiConnection from "@services/apiConnection";
+import React, { useState } from "react";
 
 import "./adminSearchBarStyle.css";
 
-function AdminSearchBar({ getOneVehicle, handleCancelButton }) {
-  const [vehiclesList, setVehiclesList] = useState();
+function AdminSearchBar({ vehiclesList, getOneVehicle, handleCancelButton }) {
   const [isDisplay, setIsDisplay] = useState(false);
   const [searchVehicle, setSearchVehicle] = useState("");
-  // console.log(isDisplay);
-
-  const listAllVehicles = () => {
-    apiConnection
-      .get(`/vehicles`)
-      .then((allVehicles) => setVehiclesList(allVehicles.data))
-      .catch((err) => console.error(err));
-  };
 
   const selectVehicle = (id) => {
     getOneVehicle(id);
     setIsDisplay(false);
     handleCancelButton();
   };
-
-  useEffect(() => {
-    listAllVehicles();
-  }, []);
 
   const handleDisplayVehicle = () => {
     setIsDisplay(!isDisplay);

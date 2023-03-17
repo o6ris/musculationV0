@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminSearchBar from "@components/AdminSearchBar/AdminSearchBar";
 import apiConnection from "@services/apiConnection";
 import validateForm from "@services/formValidator";
-import "./adminStyle.css";
 import VehicleForm from "@components/VehicleForm/VehicleForm";
+import "./adminStyle.css";
 
 function Admin() {
+  const [vehiclesList, setVehiclesList] = useState();
   const [displayEditForm, setDisplayEditForm] = useState(false);
   const [displayAddForm, setDisplayAddForm] = useState(false);
   const [vehicle, setVehicle] = useState({
@@ -16,6 +17,7 @@ function Admin() {
     price: "",
   });
   const [displayError, setDisplayError] = useState(false);
+  const { status, errorMessage } = validateForm(vehicle);
 
   // Fonction qui gère le changement d'état des inputs
   /**
@@ -28,6 +30,17 @@ function Admin() {
     setVehicle(newVehicle);
   };
 
+  const listAllVehicles = () => {
+    apiConnection
+      .get(`/vehicles`)
+      .then((allVehicles) => setVehiclesList(allVehicles.data))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    listAllVehicles();
+  }, []);
+
   const getOneVehicle = (id) => {
     apiConnection
       .get(`/vehicles/${id}`)
@@ -38,7 +51,28 @@ function Admin() {
       .catch((err) => console.error(err));
   };
 
-  const { status, errorMessage } = validateForm(vehicle);
+  const handleAddVehicle = (e) => {
+    e.preventDefault();
+    if (status) {
+      apiConnection
+        .post(`./vehicles`, vehicle)
+        .then(() => {
+          setVehicle({
+            name: "",
+            picture: "",
+            fuel: "",
+            gearbox: "",
+            price: "",
+          });
+          listAllVehicles();
+          setDisplayAddForm(false);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      setDisplayError(true);
+    }
+  };
+
   const handleEditVehicle = (e) => {
     e.preventDefault();
     if (status) {
@@ -84,6 +118,7 @@ function Admin() {
       <AdminSearchBar
         getOneVehicle={getOneVehicle}
         handleCancelButton={() => handleCancelButton(setDisplayAddForm)}
+        vehiclesList={vehiclesList}
       />
       <button
         onClick={handleDisplayAddForm}
@@ -108,7 +143,7 @@ function Admin() {
         <>
           <VehicleForm
             handleCancelButton={() => handleCancelButton(setDisplayAddForm)}
-            handleButtonAction={handleEditVehicle}
+            handleButtonAction={handleAddVehicle}
             handleInputOnChange={handleInputOnChange}
             vehicle={vehicle}
             buttonText="Add"
