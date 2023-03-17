@@ -7,6 +7,8 @@ function VehicleForm({
   handleInputOnChange,
   handleButtonAction,
   handleCancelButton,
+  handleDeleteVehicle,
+  displayEditForm,
   buttonText,
 }) {
   return (
@@ -70,6 +72,11 @@ function VehicleForm({
           <button onClick={handleCancelButton} type="button">
             Cancel
           </button>
+          {displayEditForm && (
+            <button type="button" onClick={handleDeleteVehicle}>
+              Delete
+            </button>
+          )}
         </div>
       </form>
     </div>

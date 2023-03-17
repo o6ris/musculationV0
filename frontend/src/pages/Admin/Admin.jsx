@@ -51,6 +51,17 @@ function Admin() {
       .catch((err) => console.error(err));
   };
 
+  const handleCancelButton = (setDisplayForm) => {
+    setVehicle({
+      name: "",
+      picture: "",
+      fuel: "",
+      gearbox: "",
+      price: "",
+    });
+    setDisplayForm(false);
+  };
+
   const handleAddVehicle = (e) => {
     e.preventDefault();
     if (status) {
@@ -87,6 +98,16 @@ function Admin() {
     }
   };
 
+  const handleDeleteVehicle = () => {
+    apiConnection
+      .delete(`/vehicles/${vehicle?.id}`)
+      .then(() => {
+        handleCancelButton(setDisplayEditForm);
+        listAllVehicles();
+      })
+      .catch((err) => console.error(err));
+  };
+
   const handleDisplayAddForm = () => {
     if (displayEditForm) {
       setDisplayEditForm(false);
@@ -99,17 +120,6 @@ function Admin() {
       price: "",
     });
     setDisplayAddForm(true);
-  };
-
-  const handleCancelButton = (setDisplayForm) => {
-    setVehicle({
-      name: "",
-      picture: "",
-      fuel: "",
-      gearbox: "",
-      price: "",
-    });
-    setDisplayForm(false);
   };
 
   return (
@@ -133,6 +143,8 @@ function Admin() {
             handleCancelButton={() => handleCancelButton(setDisplayEditForm)}
             handleButtonAction={handleEditVehicle}
             handleInputOnChange={handleInputOnChange}
+            handleDeleteVehicle={handleDeleteVehicle}
+            displayEditForm={displayEditForm}
             vehicle={vehicle}
             buttonText="Update"
           />
