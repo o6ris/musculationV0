@@ -6,7 +6,8 @@ import "./adminStyle.css";
 import VehicleForm from "@components/VehicleForm/VehicleForm";
 
 function Admin() {
-  const [displayForm, setDisplayForm] = useState(false);
+  const [displayEditForm, setDisplayEditForm] = useState(false);
+  const [displayAddForm, setDisplayAddForm] = useState(false);
   const [vehicle, setVehicle] = useState({
     name: "",
     picture: "",
@@ -31,7 +32,7 @@ function Admin() {
     apiConnection
       .get(`/vehicles/${id}`)
       .then((oneVehicle) => {
-        setDisplayForm(true);
+        setDisplayEditForm(true);
         setVehicle(oneVehicle.data);
       })
       .catch((err) => console.error(err));
@@ -44,7 +45,7 @@ function Admin() {
       apiConnection
         .put(`/vehicles/${vehicle?.id}`, vehicle)
         .then(() => {
-          setDisplayForm(false);
+          setDisplayEditForm(false);
         })
         .catch((err) => console.error(err));
     } else {
@@ -52,7 +53,21 @@ function Admin() {
     }
   };
 
-  const handleCancelButton = () => {
+  const handleDisplayAddForm = () => {
+    if (displayEditForm) {
+      setDisplayEditForm(false);
+    }
+    setVehicle({
+      name: "",
+      picture: "",
+      fuel: "",
+      gearbox: "",
+      price: "",
+    });
+    setDisplayAddForm(true);
+  };
+
+  const handleCancelButton = (setDisplayForm) => {
     setVehicle({
       name: "",
       picture: "",
@@ -65,15 +80,35 @@ function Admin() {
 
   return (
     <div>
+      <h1>Search your Vehicle</h1>
       <AdminSearchBar getOneVehicle={getOneVehicle} />
-      {displayForm && (
+      <button
+        onClick={handleDisplayAddForm}
+        type="button"
+        className="addVehicleButton"
+      >
+        + Add new vehicle
+      </button>
+      {displayEditForm && (
         <>
           <VehicleForm
-            handleCancelButton={handleCancelButton}
+            handleCancelButton={() => handleCancelButton(setDisplayEditForm)}
             handleButtonAction={handleEditVehicle}
             handleInputOnChange={handleInputOnChange}
             vehicle={vehicle}
             buttonText="Update"
+          />
+          {displayError && <div>{errorMessage}</div>}
+        </>
+      )}
+      {displayAddForm && (
+        <>
+          <VehicleForm
+            handleCancelButton={() => handleCancelButton(setDisplayAddForm)}
+            handleButtonAction={handleEditVehicle}
+            handleInputOnChange={handleInputOnChange}
+            vehicle={vehicle}
+            buttonText="Add"
           />
           {displayError && <div>{errorMessage}</div>}
         </>

@@ -28,10 +28,12 @@ function VehicleForm({
           value={vehicle?.picture}
           onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
         />
-        <div
-          className="vehicleFormPicture"
-          style={{ backgroundImage: `url(${vehicle?.picture})` }}
-        />
+        {vehicle?.picture.length > 0 && (
+          <div
+            className="vehicleFormPicture"
+            style={{ backgroundImage: `url(${vehicle?.picture})` }}
+          />
+        )}
         <div className="formSelect">
           <select
             onChange={(e) => handleInputOnChange(e.target.name, e.target.value)}
