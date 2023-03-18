@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import User from "../../contexts/UserContext";
 import "./navStyle.css";
 
 function Nav() {
   const navigate = useNavigate();
+  const { user, handleUser } = useContext(User.UserContext);
+
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
+  };
+
   return (
     <nav>
       <ul className="navContainer">
@@ -13,12 +21,21 @@ function Nav() {
           </button>
         </div>
         <div className="pagesNavigation">
-          <button type="button" onClick={() => navigate("/Admin")}>
-            Administration
-          </button>
-          <button type="button" onClick={() => navigate("/Login")}>
-            Login
-          </button>
+          {user?.isAdmin === 1 && (
+            <button type="button" onClick={() => navigate("/Admin")}>
+              Administration
+            </button>
+          )}
+          {!user && (
+            <button type="button" onClick={() => navigate("/Login")}>
+              Login
+            </button>
+          )}
+          {user && (
+            <button type="button" onClick={handleLogOut}>
+              Logout
+            </button>
+          )}
         </div>
       </ul>
     </nav>
