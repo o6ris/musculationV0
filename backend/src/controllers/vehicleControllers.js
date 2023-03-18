@@ -43,8 +43,9 @@ const add = (req, res) => {
 };
 
 const edit = (req, res) => {
+  const id = parseInt(req.params.id, 10);
   models.vehicle
-    .update(req.body, req.params.id)
+    .update(req.body, id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

@@ -6,13 +6,20 @@ function Nav() {
   const navigate = useNavigate();
   return (
     <nav>
-      <ul className="nav">
-        <button type="button" onClick={() => navigate("/")}>
-          Home
-        </button>
-        <button type="button" onClick={() => navigate("/Admin")}>
-          Administration
-        </button>
+      <ul className="navContainer">
+        <div className="homeNavigation">
+          <button type="button" onClick={() => navigate("/")}>
+            Home
+          </button>
+        </div>
+        <div className="pagesNavigation">
+          <button type="button" onClick={() => navigate("/Admin")}>
+            Administration
+          </button>
+          <button type="button" onClick={() => navigate("/Login")}>
+            Login
+          </button>
+        </div>
       </ul>
     </nav>
   );

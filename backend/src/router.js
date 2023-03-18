@@ -3,6 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const vehicleControllers = require("./controllers/vehicleControllers");
+const userControllers = require("./controllers/userControllers");
+
+router.post("/login", userControllers.validateUser);
 
 router.get("/vehicles", vehicleControllers.browse);
 router.get("/vehicles/:id", vehicleControllers.read);

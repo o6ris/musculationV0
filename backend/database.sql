@@ -24,7 +24,7 @@ VALUES
 
 CREATE TABLE user (
   id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `alias` varchar(255) NOT NULL,
+  `alias` varchar(255) UNIQUE NOT NULL,
   `isAdmin` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
